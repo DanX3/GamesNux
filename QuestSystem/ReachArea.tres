@@ -5,6 +5,6 @@
 [resource]
 script = ExtResource( 1 )
 unlockSignal = "reach_area"
-params = [ "forest" ]
+unlockParams = [ "forest" ]
 actionSignal = "gain_gold"
 actionsParams = [ 10 ]

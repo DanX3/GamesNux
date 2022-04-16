@@ -1,37 +1,31 @@
 extends Resource
 
 class_name Goal
-enum named {a, b, c}
+signal reached
+
 export (String) var unlockSignal
-export (Array) var params
+export (Array) var unlockParams
 export (String) var actionSignal
 export (Array) var actionsParams
 
-func onUnlockSignal(param0, param1, param2, param3):
-	if len(params) > 0 and params[0] != param0:
-		return
-	
-	if len(params) > 1 and params[1] != param1:
-		return
-	
-	if len(params) > 2 and params[2] != param2:
-		return
-		
-	if len(params) > 3 and params[3] != param3:
+func onUnlockSignal(action, params):
+	if not _validate(params):
 		return
 	
 	if actionSignal.empty():
-		return
+		emit_signal("reached")
 	
 	if len(actionsParams) > 3:
-		emit_signal(actionSignal, params[0], params[1], params[2], params[3])
+		emit_signal('reached', actionSignal, actionsParams[0], actionsParams[1], actionsParams[2], actionsParams[3])
 	if len(actionsParams) > 2:
-		emit_signal(actionSignal, params[0], params[1], params[2])
+		emit_signal('reached', actionSignal, actionsParams[0], actionsParams[1], actionsParams[2], null)
 	elif len(actionsParams) > 1:
-		emit_signal(actionSignal, params[0], params[1])
+		emit_signal('reached', actionSignal, actionsParams[0], actionsParams[1], null, null)
 	elif len(actionsParams) > 0:
-		emit_signal(actionSignal, params[0])
+		emit_signal('reached', actionSignal, actionsParams[0], null, null, null)
 	else:
-		emit_signal(actionSignal)
+		emit_signal('reached', actionSignal, null, null, null, null)
 
-		
+
+func _validate(params):
+	return true
