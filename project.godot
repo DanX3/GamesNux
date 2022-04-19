@@ -9,19 +9,37 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "Resource",
+"base": "Node",
 "class": "Goal",
 "language": "GDScript",
 "path": "res://QuestSystem/Goal.gd"
 }, {
-"base": "Resource",
+"base": "Node",
 "class": "Quest",
 "language": "GDScript",
 "path": "res://QuestSystem/Quest.gd"
+}, {
+"base": "Resource",
+"class": "QuestState",
+"language": "GDScript",
+"path": "res://QuestSystem/QuestState.gd"
+}, {
+"base": "Node",
+"class": "ReachPlace",
+"language": "GDScript",
+"path": "res://QuestSystem/quest_goals/ReachPlace.gd"
+}, {
+"base": "Node",
+"class": "SignalHUB",
+"language": "GDScript",
+"path": "res://QuestSystem/SignalHUB.gd"
 } ]
 _global_script_class_icons={
 "Goal": "",
-"Quest": ""
+"Quest": "",
+"QuestState": "",
+"ReachPlace": "",
+"SignalHUB": ""
 }
 
 [application]
@@ -29,6 +47,10 @@ _global_script_class_icons={
 config/name="Lab"
 run/main_scene="res://QuestSystem/TestScene.tscn"
 config/icon="res://icon.png"
+
+[autoload]
+
+SignalHub="*res://QuestSystem/SignalHUB.gd"
 
 [display]
 

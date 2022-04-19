@@ -1,16 +1,28 @@
 [gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://QuestSystem/TestScene.gd" type="Script" id=1]
-[ext_resource path="res://QuestSystem/Goal.gd" type="Script" id=2]
-
-[sub_resource type="Resource" id=1]
-script = ExtResource( 2 )
-unlockSignal = "reach_area"
-unlockParams = [ "forest" ]
-actionSignal = "gain_gold"
-actionsParams = [ 10 ]
+[ext_resource path="res://QuestSystem/quest_goals/ReachPlace.gd" type="Script" id=2]
+[ext_resource path="res://QuestSystem/Quest.gd" type="Script" id=3]
 
 [node name="TestScene" type="Node2D"]
 position = Vector2( -3, 0 )
 script = ExtResource( 1 )
-goal = SubResource( 1 )
+
+[node name="Quest" type="Node" parent="."]
+script = ExtResource( 3 )
+quest_name = "wanderer_journal"
+display_name = "A Wanderer's Journal"
+
+[node name="ArrivedAtValley" type="Node" parent="Quest"]
+script = ExtResource( 2 )
+place = "valley"
+
+[node name="ArrivedAtForest" type="Node" parent="Quest"]
+script = ExtResource( 2 )
+place = "forest"
+
+[node name="ArrivedAtDesert" type="Node" parent="Quest"]
+script = ExtResource( 2 )
+place = "desert"
+
+[connection signal="accomplished" from="Quest" to="." method="_on_Quest_accomplished"]
