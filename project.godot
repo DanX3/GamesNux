@@ -15,6 +15,11 @@ _global_script_classes=[ {
 "path": "res://QuestSystem/Goal.gd"
 }, {
 "base": "Node",
+"class": "GoalStringEquals",
+"language": "GDScript",
+"path": "res://QuestSystem/quest_goals/GoalStringEquals.gd"
+}, {
+"base": "Node",
 "class": "Quest",
 "language": "GDScript",
 "path": "res://QuestSystem/Quest.gd"
@@ -25,20 +30,15 @@ _global_script_classes=[ {
 "path": "res://QuestSystem/QuestState.gd"
 }, {
 "base": "Node",
-"class": "ReachPlace",
-"language": "GDScript",
-"path": "res://QuestSystem/quest_goals/ReachPlace.gd"
-}, {
-"base": "Node",
 "class": "SignalHUB",
 "language": "GDScript",
 "path": "res://QuestSystem/SignalHUB.gd"
 } ]
 _global_script_class_icons={
 "Goal": "",
+"GoalStringEquals": "",
 "Quest": "",
 "QuestState": "",
-"ReachPlace": "",
 "SignalHUB": ""
 }
 

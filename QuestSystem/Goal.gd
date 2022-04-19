@@ -4,6 +4,8 @@ class_name Goal
 signal reached
 enum SignalType {EMPTY, INT, FLOAT, STRING}
 
+export (String) var action
+
 func _get_status() -> Dictionary:
 	return {}
 	

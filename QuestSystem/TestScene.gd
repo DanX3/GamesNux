@@ -3,15 +3,20 @@ extends Node2D
 onready var forestCondition = $Quest/ArrivedAtForest
 onready var desertCondition = $Quest/ArrivedAtDesert
 onready var valleyCondition = $Quest/ArrivedAtValley
+onready var deaths = $Quest/DieCounter
 
 func _ready():
 	forestCondition.connect("reached", self, 'on_forest_reached')
 	desertCondition.connect("reached", self, 'on_desert_reached')
 	valleyCondition.connect("reached", self, 'on_valley_reached')
-#	forestCondition._set_active(true)
+	
 	get_node("/root/SignalHub").emit_signal("s_string", 'arrived_at', 'valley')
 	get_node("/root/SignalHub").emit_signal("s_string", 'arrived_at', 'forest')
 	get_node("/root/SignalHub").emit_signal("s_string", 'arrived_at', 'desert')
+	get_node("/root/SignalHub").emit_signal("s_string", 'defeated_enemy', 'ogre')
+	get_node("/root/SignalHub").emit_signal("s_empty", 'died')
+	get_node("/root/SignalHub").emit_signal("s_empty", 'died')
+	get_node("/root/SignalHub").emit_signal("s_empty", 'died')
 	
 	
 	

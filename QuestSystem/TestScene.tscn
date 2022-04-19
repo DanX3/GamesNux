@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://QuestSystem/TestScene.gd" type="Script" id=1]
-[ext_resource path="res://QuestSystem/quest_goals/ReachPlace.gd" type="Script" id=2]
+[ext_resource path="res://QuestSystem/quest_goals/GoalStringEquals.gd" type="Script" id=2]
 [ext_resource path="res://QuestSystem/Quest.gd" type="Script" id=3]
+[ext_resource path="res://QuestSystem/quest_goals/EventCounter.gd" type="Script" id=4]
 
 [node name="TestScene" type="Node2D"]
 position = Vector2( -3, 0 )
@@ -15,14 +16,32 @@ display_name = "A Wanderer's Journal"
 
 [node name="ArrivedAtValley" type="Node" parent="Quest"]
 script = ExtResource( 2 )
-place = "valley"
+action = "arrived_at"
+string_value = "valley"
+display_message = "Get to the %s"
 
 [node name="ArrivedAtForest" type="Node" parent="Quest"]
 script = ExtResource( 2 )
-place = "forest"
+action = "arrived_at"
+string_value = "forest"
+display_message = "Get to the %s"
 
 [node name="ArrivedAtDesert" type="Node" parent="Quest"]
 script = ExtResource( 2 )
-place = "desert"
+action = "arrived_at"
+string_value = "desert"
+display_message = "Get to the %s"
+
+[node name="DefeatOgre" type="Node" parent="Quest"]
+script = ExtResource( 2 )
+action = "defeated_enemy"
+string_value = "ogre"
+display_message = "Defeat the %s"
+
+[node name="DieCounter" type="Node" parent="Quest"]
+script = ExtResource( 4 )
+action = "died"
+times = 3
+display_message = "Die %d times"
 
 [connection signal="accomplished" from="Quest" to="." method="_on_Quest_accomplished"]
