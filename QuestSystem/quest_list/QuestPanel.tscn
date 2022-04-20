@@ -1,0 +1,31 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://QuestSystem/quest_list/QuestPanel.gd" type="Script" id=1]
+
+[node name="QuestPanel" type="Panel"]
+margin_right = 119.0
+margin_bottom = 30.769
+rect_min_size = Vector2( 0, 30 )
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_left = 3.0
+margin_top = 3.0
+margin_right = 84.0
+margin_bottom = 17.0
+text = "Quest Name"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 10.0
+margin_top = 22.0
+margin_right = 117.0
+margin_bottom = 62.0
+__meta__ = {
+"_edit_use_anchors_": false
+}

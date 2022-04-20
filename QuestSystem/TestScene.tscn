@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://QuestSystem/TestScene.gd" type="Script" id=1]
 [ext_resource path="res://QuestSystem/quest_goals/GoalStringEquals.gd" type="Script" id=2]
 [ext_resource path="res://QuestSystem/Quest.gd" type="Script" id=3]
 [ext_resource path="res://QuestSystem/quest_goals/EventCounter.gd" type="Script" id=4]
+[ext_resource path="res://QuestSystem/quest_goals/AccumulatorFloat.gd" type="Script" id=5]
 
 [node name="TestScene" type="Node2D"]
 position = Vector2( -3, 0 )
@@ -12,36 +13,243 @@ script = ExtResource( 1 )
 [node name="Quest" type="Node" parent="."]
 script = ExtResource( 3 )
 quest_name = "wanderer_journal"
-display_name = "A Wanderer's Journal"
-
-[node name="ArrivedAtValley" type="Node" parent="Quest"]
-script = ExtResource( 2 )
-action = "arrived_at"
-string_value = "valley"
-display_message = "Get to the %s"
+display_name = "A Wanderer's journal"
 
 [node name="ArrivedAtForest" type="Node" parent="Quest"]
 script = ExtResource( 2 )
+display_message = "Get to the %s"
 action = "arrived_at"
 string_value = "forest"
+
+[node name="DealDamage" type="Node" parent="Quest"]
+script = ExtResource( 5 )
+display_message = "Deal %f damage"
+action = "damage_dealt"
+accumulator = 3.14
+
+[node name="ArrivedAtValley" type="Node" parent="Quest"]
+script = ExtResource( 2 )
 display_message = "Get to the %s"
+action = "arrived_at"
+string_value = "valley"
 
 [node name="ArrivedAtDesert" type="Node" parent="Quest"]
 script = ExtResource( 2 )
+display_message = "Get to the %s"
 action = "arrived_at"
 string_value = "desert"
-display_message = "Get to the %s"
 
 [node name="DefeatOgre" type="Node" parent="Quest"]
 script = ExtResource( 2 )
+display_message = "Defeat the %s"
 action = "defeated_enemy"
 string_value = "ogre"
-display_message = "Defeat the %s"
 
 [node name="DieCounter" type="Node" parent="Quest"]
 script = ExtResource( 4 )
+display_message = "Die %d times"
 action = "died"
 times = 3
-display_message = "Die %d times"
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Empty" type="Panel" parent="CanvasLayer"]
+margin_left = 31.0
+margin_top = 33.0
+margin_right = 470.0
+margin_bottom = 88.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Empty"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 28.0
+margin_top = -12.5
+margin_right = 159.0
+margin_bottom = 12.5
+text = "died"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="EmptyButton" type="Button" parent="CanvasLayer/Empty"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -10.0
+margin_right = -22.0
+margin_bottom = 10.0
+text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Int" type="Panel" parent="CanvasLayer"]
+margin_left = 31.0
+margin_top = 122.0
+margin_right = 470.0
+margin_bottom = 177.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Int"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 28.0
+margin_top = -12.5
+margin_right = 159.0
+margin_bottom = 12.5
+text = "damage_dealt"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="CanvasLayer/Int"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 183.0
+margin_top = -12.5
+margin_right = 314.0
+margin_bottom = 12.5
+text = "3"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IntButton" type="Button" parent="CanvasLayer/Int"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -10.0
+margin_right = -22.0
+margin_bottom = 10.0
+text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Float" type="Panel" parent="CanvasLayer"]
+margin_left = 31.0
+margin_top = 212.0
+margin_right = 470.0
+margin_bottom = 267.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/Float"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 28.0
+margin_top = -12.5
+margin_right = 159.0
+margin_bottom = 12.5
+text = "damage_dealt"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="CanvasLayer/Float"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 183.0
+margin_top = -12.5
+margin_right = 314.0
+margin_bottom = 12.5
+text = "3.14"
+
+[node name="FloatButton" type="Button" parent="CanvasLayer/Float"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -10.0
+margin_right = -22.0
+margin_bottom = 10.0
+text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="String" type="Panel" parent="CanvasLayer"]
+margin_left = 31.0
+margin_top = 298.0
+margin_right = 470.0
+margin_bottom = 353.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit" type="TextEdit" parent="CanvasLayer/String"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 28.0
+margin_top = -12.5
+margin_right = 159.0
+margin_bottom = 12.5
+text = "arrived_at"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEdit2" type="TextEdit" parent="CanvasLayer/String"]
+anchor_top = 0.5
+anchor_bottom = 0.5
+margin_left = 183.0
+margin_top = -12.5
+margin_right = 314.0
+margin_bottom = 12.5
+text = "forest"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="StringButton" type="Button" parent="CanvasLayer/String"]
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+margin_left = -101.0
+margin_top = -10.0
+margin_right = -22.0
+margin_bottom = 10.0
+text = "Send"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SaveButton" type="Button" parent="CanvasLayer"]
+margin_left = 31.0
+margin_top = 402.0
+margin_right = 136.0
+margin_bottom = 440.0
+text = "Save"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LoadButton" type="Button" parent="CanvasLayer"]
+margin_left = 160.0
+margin_top = 402.0
+margin_right = 265.0
+margin_bottom = 440.0
+text = "Load"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [connection signal="accomplished" from="Quest" to="." method="_on_Quest_accomplished"]
+[connection signal="pressed" from="CanvasLayer/Empty/EmptyButton" to="." method="_on_EmptyButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Int/IntButton" to="." method="_on_IntButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/Float/FloatButton" to="." method="_on_FloatButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/String/StringButton" to="." method="_on_StringButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/SaveButton" to="." method="_on_SaveButton_pressed"]
+[connection signal="pressed" from="CanvasLayer/LoadButton" to="." method="_on_LoadButton_pressed"]

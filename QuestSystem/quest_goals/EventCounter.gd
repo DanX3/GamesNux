@@ -1,7 +1,6 @@
 extends Goal
 
 export (int) var times
-export (String) var display_message
 var counter = 0
 
 
@@ -21,8 +20,15 @@ func _on_HUB_signal(action):
 		emit_signal("reached")
 
 
-func _get_display_message():
-	if display_message.find("%d") != -1:
-		return display_message % times
-	else:
-		return display_message
+func get_formatter():
+	return "%d"
+
+func get_value():
+	return times
+
+
+func _get_status():
+	return {'counter': counter}
+
+func _set_status(status):
+	counter = status.counter

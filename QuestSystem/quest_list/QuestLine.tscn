@@ -1,0 +1,6 @@
+[gd_scene format=2]
+
+[node name="QuestLine" type="Label"]
+margin_right = 119.0
+margin_bottom = 14.0
+text = "Quest description"
