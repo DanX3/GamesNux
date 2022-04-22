@@ -1,4 +1,4 @@
-extends "res://QuestSystem/Goal.gd"
+extends Goal
 
 class_name GoalStringEquals
 
@@ -13,7 +13,7 @@ func set_active(active: bool) -> void:
 
 func _on_HUB_signal(action, s):
 	if self.action == action and s == string_value:
-		emit_signal("reached")
+		emit_signal("reached", self)
 
 
 func get_formatter():

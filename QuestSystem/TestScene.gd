@@ -2,15 +2,15 @@ extends Node2D
 
 onready var forestCondition = $Quest/ArrivedAtForest
 onready var desertCondition = $Quest/ArrivedAtDesert
-onready var valleyCondition = $Quest/ArrivedAtValley
+#onready var valleyCondition = $Quest/ArrivedAtValley
 
 
-onready var deaths = $Quest/DieCounter
+#onready var deaths = $Quest/DieCounter
 
 func _ready():
 	forestCondition.connect("reached", self, 'on_forest_reached')
 	desertCondition.connect("reached", self, 'on_desert_reached')
-	valleyCondition.connect("reached", self, 'on_valley_reached')
+#	valleyCondition.connect("reached", self, 'on_valley_reached')
 	
 #	get_node("/root/SignalHub").emit_signal("s_string", 'arrived_at', 'valley')
 #	get_node("/root/SignalHub").emit_signal("s_string", 'arrived_at', 'forest')
@@ -20,13 +20,13 @@ func _ready():
 #	get_node("/root/SignalHub").emit_signal("s_empty", 'died')
 #	get_node("/root/SignalHub").emit_signal("s_empty", 'died')
 	
-func on_forest_reached():
+func on_forest_reached(goal):
 	print('Ehy!! I reached the forest')
 
-func on_desert_reached():
+func on_desert_reached(goal):
 	print('Ehy!! I reached the desert')
 
-func on_valley_reached():
+func on_valley_reached(goal):
 	print('Ehy!! I reached the valley')
 
 func _on_Quest_accomplished(quest_name):

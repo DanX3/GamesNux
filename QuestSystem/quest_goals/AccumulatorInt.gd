@@ -16,7 +16,7 @@ func _on_HUB_signal(action, i):
 	
 	print("%d / %d" % [counter, accumulator])
 	if counter >= accumulator:
-		emit_signal("reached")
+		emit_signal("reached", self)
 
 func get_formatter():
 	return "%d"

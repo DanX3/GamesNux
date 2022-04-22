@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://QuestSystem/Goal.gd"
 }, {
-"base": "Node",
+"base": "Goal",
 "class": "GoalStringEquals",
 "language": "GDScript",
 "path": "res://QuestSystem/quest_goals/GoalStringEquals.gd"

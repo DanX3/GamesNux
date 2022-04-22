@@ -4,7 +4,7 @@
 [ext_resource path="res://QuestSystem/quest_goals/GoalStringEquals.gd" type="Script" id=2]
 [ext_resource path="res://QuestSystem/Quest.gd" type="Script" id=3]
 [ext_resource path="res://QuestSystem/quest_goals/EventCounter.gd" type="Script" id=4]
-[ext_resource path="res://QuestSystem/quest_goals/AccumulatorFloat.gd" type="Script" id=5]
+[ext_resource path="res://QuestSystem/quest_goals/AccumulatorInt.gd" type="Script" id=5]
 
 [node name="TestScene" type="Node2D"]
 position = Vector2( -3, 0 )
@@ -19,37 +19,40 @@ display_name = "A Wanderer's journal"
 script = ExtResource( 2 )
 display_message = "Get to the %s"
 action = "arrived_at"
+optional = true
 string_value = "forest"
 
-[node name="DealDamage" type="Node" parent="Quest"]
+[node name="Collect3Logs" type="Node" parent="Quest/ArrivedAtForest"]
 script = ExtResource( 5 )
-display_message = "Deal %f damage"
-action = "damage_dealt"
-accumulator = 3.14
+action = "collected_log"
+accumulator = 3
 
-[node name="ArrivedAtValley" type="Node" parent="Quest"]
-script = ExtResource( 2 )
-display_message = "Get to the %s"
-action = "arrived_at"
-string_value = "valley"
+[node name="BuildCabin" type="Node" parent="Quest/ArrivedAtForest"]
+script = ExtResource( 4 )
+display_message = "Build Cabn"
+action = "built_cabin"
+times = 1
 
 [node name="ArrivedAtDesert" type="Node" parent="Quest"]
 script = ExtResource( 2 )
 display_message = "Get to the %s"
 action = "arrived_at"
+optional = true
 string_value = "desert"
 
-[node name="DefeatOgre" type="Node" parent="Quest"]
-script = ExtResource( 2 )
-display_message = "Defeat the %s"
-action = "defeated_enemy"
-string_value = "ogre"
-
-[node name="DieCounter" type="Node" parent="Quest"]
+[node name="DieCounter" type="Node" parent="Quest/ArrivedAtDesert"]
 script = ExtResource( 4 )
-display_message = "Die %d times"
+display_message = "Die %d time"
 action = "died"
-times = 3
+optional = true
+fails_quest = true
+times = 1
+
+[node name="FindWater" type="Node" parent="Quest/ArrivedAtDesert"]
+script = ExtResource( 4 )
+display_message = "Find water"
+action = "found_water"
+times = 1
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 

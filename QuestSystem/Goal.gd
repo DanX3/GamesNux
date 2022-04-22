@@ -2,11 +2,12 @@ extends Node
 
 class_name Goal
 
-signal reached
+signal reached(goal)
 
 export (String) var display_message
-export (bool) var optional = false
 export (String) var action
+export (bool) var optional = false
+export (bool) var fails_quest = false
 
 func _get_status() -> Dictionary:
 	return {}

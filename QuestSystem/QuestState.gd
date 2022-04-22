@@ -3,7 +3,7 @@ extends Resource
 class_name QuestState
 
 export var status = {}
-export var current_goal: NodePath
+export var active_goals: Array #Array<NodePath>
 
 func _ready():
 	pass
