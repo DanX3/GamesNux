@@ -1,7 +1,8 @@
-extends Goal
+tool
+extends "res://addons/quest_maker/Goal.gd"
 
 export (int) var times
-var counter = 0
+var counter := 1
 
 
 func set_active(active: bool) -> void:
@@ -12,9 +13,10 @@ func set_active(active: bool) -> void:
 
 
 func _on_HUB_signal(action):
-	if self.action == action:
-		counter += 1
+	if self.action != action:
+		return
 	
+	counter += 1
 	print("%d / %d" % [counter, times])
 	if counter >= times:
 		emit_signal("reached", self)

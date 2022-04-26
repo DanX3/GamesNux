@@ -1,13 +1,18 @@
+tool
 extends Node
 
 class_name Goal
 
 signal reached(goal)
 
-export (String) var display_message
 export (String) var action
+export (String) var display_message
 export (bool) var optional = false
 export (bool) var fails_quest = false
+export (bool) var clear_goals = false
+
+func _enter_tree():
+	set_meta("goal", true)
 
 func _get_status() -> Dictionary:
 	return {}

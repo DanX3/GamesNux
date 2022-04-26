@@ -1,8 +1,8 @@
+tool
 extends Node
 
-class_name Quest
-
 signal accomplished(quest_name)
+signal failed(quest_name)
 signal goal_added
 signal goal_removed
 
@@ -30,10 +30,16 @@ func _process_goals(goal_reached: Goal):
 	_set_goal_active(goal_reached, false)
 	goals.erase(goal_reached)
 	
+	# check if mission is failed
+	if goal_reached.fails_quest:
+		_clear_goals()
+		emit_signal("failed", quest_name)
+		get_node("/root/SignalHub").emit_signal("s_string", "quest_failed", quest_name)
+		return
+	
 	# accomplish the mission if it was the last node in its parent
 	if _is_node_last(goal_reached) and goal_reached.get_child_count() == 0:
-		_set_goal_active(goal_reached, false)
-		goals.clear()
+		_clear_goals()
 		get_node("/root/SignalHub").emit_signal("s_string", "quest_finished", quest_name)
 		get_node("/root/SignalHub").emit_signal("s_resource", "item_obtained", reward)
 		emit_signal("accomplished", quest_name)
@@ -41,9 +47,8 @@ func _process_goals(goal_reached: Goal):
 	
 	# if the goal has children, disable all goals and start tracking its children
 	if goal_reached.get_child_count() > 0:
-		for g in goals:
-			_set_goal_active(g, false)
-		goals.clear()
+		if goal_reached.clear_goals:
+			_clear_goals()
 		_chain_activation(goal_reached.get_child(0))
 		return
 	
@@ -53,6 +58,11 @@ func _process_goals(goal_reached: Goal):
 		
 	print("#active goals: %d" % len(goals))
 	
+
+func _clear_goals():
+	for g in goals:
+		_set_goal_active(g, false)
+	goals.clear()
 
 func _chain_activation(goal: Goal):
 	goals.append(goal)
@@ -121,3 +131,21 @@ func load_status():
 	for path in status.active_goals:
 		goals.append(get_node(path))
 		_set_goal_active(get_node(path), true)
+
+func _get_configuration_warning():
+	if get_child_count() == 0:
+		return "The quest has no Goals"
+	
+	for child in get_children():
+		if not _is_goal_recursive(child):
+			return "One of the children is not a Goal"
+	
+	return ""
+
+func _is_goal_recursive(node: Node) -> bool:
+	for child in node.get_children():
+		if not _is_goal_recursive(child):
+			return false
+	
+	print(node.name, node is Goal)
+	return node is Goal
