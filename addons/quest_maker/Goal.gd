@@ -11,13 +11,16 @@ export (bool) var optional = false
 export (bool) var fails_quest = false
 export (bool) var clear_goals = false
 
-func _enter_tree():
-	set_meta("goal", true)
 
-func _get_status() -> Dictionary:
+func _ready():
+	if not Engine.editor_hint:
+		set_meta("goal", true)
+		name = '? ' + name
+
+func get_status() -> Dictionary:
 	return {}
 	
-func _set_status(status) -> void:
+func set_status(status) -> void:
 	return
 
 func set_active(active: bool) -> void:
@@ -34,3 +37,18 @@ func get_formatter():
 
 func get_value():
 	return null
+
+
+enum StateLabel { UNCHECKED, ACTIVE, REACHED, FAILED }
+const labels = {
+	StateLabel.UNCHECKED: '  ',
+	StateLabel.ACTIVE: '→ ',
+	StateLabel.REACHED: '✓ ',
+	StateLabel.FAILED: 'X '
+}
+
+var statelabel = StateLabel.UNCHECKED
+
+func set_state_label(statelabel):
+	name = labels[statelabel] + name.substr(2)
+	self.statelabel = statelabel

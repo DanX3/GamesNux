@@ -26,9 +26,9 @@ func get_formatter():
 func get_value():
 	return counter
 
-func _get_status():
+func get_status():
 	return {'counter': counter}
 
-func _set_status(status):
+func set_status(status):
 	counter = status.counter
 	print('set counter to %d' % status.counter)

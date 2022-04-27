@@ -1,5 +1,6 @@
 extends Node2D
 
+onready var quest = $TheFryingPan
 
 func _on_EmptyButton_pressed():
 	get_node("/root/SignalHub").emit_signal("s_empty",\
@@ -25,11 +26,11 @@ func _on_StringButton_pressed():
 
 
 func _on_SaveButton_pressed():
-	$Quest.save_status()
+	quest.save_status()
 
 
 func _on_LoadButton_pressed():
-	$Quest.load_status()
+	quest.load_status()
 
 
 func _on_TheFryingPan_accomplished(quest_name):
