@@ -15,7 +15,7 @@ export (bool) var clear_goals = false
 func _ready():
 	if not Engine.editor_hint:
 		set_meta("goal", true)
-		name = '? ' + name
+		name = '  ' + name
 
 func get_status() -> Dictionary:
 	return {}
