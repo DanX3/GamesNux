@@ -15,7 +15,9 @@ var goals = []
 var display_messages := {}
 
 func _ready():
+	# if processing in game
 	if not Engine.editor_hint:
+		add_to_group("__quest__")
 		print("processing goals")
 		_process_goals(null)
 	
@@ -119,7 +121,7 @@ func _fill_status(target: Node):
 		_fill_status(child)
 
 
-const savepath = 'res://addons/quest_maker/savedata/%s.tres'
+const savepath = 'res://addons/quest_maker/questdata/%s.tres'
 
 func save_status():
 	status.clear()
@@ -184,3 +186,7 @@ func _is_goal_recursive(node: Node) -> bool:
 	
 	print(node.name, node is Goal)
 	return node is Goal
+
+func save_all(root: Node):
+	for quest in get_tree().get_nodes_in_group("__quest__"):
+		quest.save_status()
