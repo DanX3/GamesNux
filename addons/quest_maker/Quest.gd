@@ -1,6 +1,8 @@
 tool
 extends Node
 
+class_name Quest
+
 signal accomplished(quest_name)
 signal failed(quest_name)
 signal goal_added
@@ -14,10 +16,13 @@ var active_node_path
 var goals = []
 var display_messages := {}
 
+#
+# Quest navigation
+#
+
 func _ready():
 	# if processing in game
 	if not Engine.editor_hint:
-		add_to_group("__quest__")
 		print("processing goals")
 		_process_goals(null)
 	
@@ -32,16 +37,12 @@ func _process_goals(goal_reached: Goal):
 	
 	# disables the reached goal
 	goal_reached.set_state_label(Goal.StateLabel.REACHED)
+	for key in goal_reached.add_key:
+		key_add(key)
+	for key in goal_reached.remove_key:
+		key_remove(key)
 	_set_goal_active(goal_reached, false)
 	goals.erase(goal_reached)
-	
-	# check if mission is failed
-	if goal_reached.fails_quest:
-		_clear_goals()
-		emit_signal("failed", quest_name)
-		get_node("/root/SignalHub").emit_signal("s_string", "quest_failed", quest_name)
-		name = Goal.labels[Goal.StateLabel.FAILED] + name
-		return
 	
 	# accomplish the mission if it was the last node in its parent
 	if _is_node_last(goal_reached) and goal_reached.get_child_count() == 0:
@@ -104,7 +105,10 @@ func _set_goal_active(goal: Goal, active: bool) -> void:
 		display_messages.erase(path)
 		goal.disconnect("reached", self, '_process_goals')
 		emit_signal("goal_removed")
-	
+
+#
+# Status Management
+#
 
 var status = []
 
@@ -130,6 +134,7 @@ func save_status():
 	print(status)
 	var resource = QuestState.new()
 	resource.status = status
+	resource.keys = keys.keys()
 	var error = ResourceSaver.save(savepath % quest_name, resource)
 	print(error)
 
@@ -138,17 +143,9 @@ func load_status():
 	for goal in goals:
 		_set_goal_active(goal, false)
 	goals.clear()
-	var res_path = savepath % quest_name
-	print('loaded ' + res_path)
-	var status = ResourceLoader.load(res_path) as QuestState
+	var status = ResourceLoader.load(savepath % quest_name) as QuestState
 	for child in get_children():
 		_apply_status(status, child)
-#	for key in status.status.keys():
-#		print(status.status[key])
-#		get_node(key).set_status(status.status[key])
-#	for path in status.active_goals:
-#		goals.append(get_node(path))
-#		_set_goal_active(get_node(path), true)
 
 func _apply_status(status: QuestState, target: Node):
 	if not target is Goal:
@@ -159,14 +156,15 @@ func _apply_status(status: QuestState, target: Node):
 	target.set_state_label(target_status['__statelabel__'])
 	if target_status['__statelabel__'] == Goal.StateLabel.ACTIVE:
 		_set_goal_active(target, true)
-#	var target_status = target._get_status()
-#	target_status['__statelabel__'] = target.statelabel
-#	status.append(target_status)
 	
 	for child in target.get_children():
 #		_fill_status(child)
 		_apply_status(status, child)
 
+
+#
+# Configuration warning
+#
 
 func _get_configuration_warning():
 	if get_child_count() == 0:
@@ -185,8 +183,40 @@ func _is_goal_recursive(node: Node) -> bool:
 			return false
 	
 	print(node.name, node is Goal)
-	return node is Goal
+	return node is Goal or node is QuestAction
 
-func save_all(root: Node):
-	for quest in get_tree().get_nodes_in_group("__quest__"):
-		quest.save_status()
+
+#
+# Keys Management
+#
+
+var keys := {}
+
+func key_add(key):
+	if key is String:
+		keys[key] = 0
+	
+	if key is Array:
+		for k in key:
+			key_add(k)
+
+func key_remove(key: String) -> bool:
+	return keys.erase(key)
+
+func key_check(quest_name: String, key: String) -> bool:
+	var quest_state = ResourceLoader.load(savepath % quest_name) as QuestState
+	if quest_state == null:
+		return false
+	return quest_state.keys.has(key)
+
+
+#
+# Actions
+#
+
+# check if mission is failed
+func fail():
+	_clear_goals()
+	emit_signal("failed", quest_name)
+	get_node("/root/SignalHub").emit_signal("s_string", "quest_failed", quest_name)
+	name = Goal.labels[Goal.StateLabel.FAILED] + name

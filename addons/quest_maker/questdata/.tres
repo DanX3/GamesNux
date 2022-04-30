@@ -6,17 +6,18 @@
 script = ExtResource( 1 )
 status = [ {
 "__statelabel__": 2,
-"counter": 3
+"counter": 1
 }, {
-"__statelabel__": 3
+"__statelabel__": 2,
+"counter": 1
 }, {
-"__statelabel__": 0
+"__statelabel__": 1,
+"counter": 0
 }, {
-"__statelabel__": 0
+"__statelabel__": 0,
+"counter": 0
 }, {
-"__statelabel__": 2
-}, {
-"__statelabel__": 1
-}, {
-"__statelabel__": 1
+"__statelabel__": 0,
+"counter": 0
 } ]
+keys = [  ]

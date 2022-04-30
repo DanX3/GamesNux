@@ -9,10 +9,25 @@
 config_version=4
 
 _global_script_classes=[ {
+"base": "QuestAction",
+"class": "CustomAction",
+"language": "GDScript",
+"path": "res://QuestSystem/CustomAction.gd"
+}, {
 "base": "Node",
 "class": "Goal",
 "language": "GDScript",
 "path": "res://addons/quest_maker/Goal.gd"
+}, {
+"base": "Node",
+"class": "Quest",
+"language": "GDScript",
+"path": "res://addons/quest_maker/Quest.gd"
+}, {
+"base": "Node",
+"class": "QuestAction",
+"language": "GDScript",
+"path": "res://addons/quest_maker/QuestAction.gd"
 }, {
 "base": "Resource",
 "class": "QuestState",
@@ -25,7 +40,10 @@ _global_script_classes=[ {
 "path": "res://addons/quest_maker/SignalHUB.gd"
 } ]
 _global_script_class_icons={
+"CustomAction": "",
 "Goal": "",
+"Quest": "",
+"QuestAction": "",
 "QuestState": "",
 "SignalHUB": ""
 }

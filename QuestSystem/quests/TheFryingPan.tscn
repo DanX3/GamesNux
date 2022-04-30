@@ -1,17 +1,14 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://addons/quest_maker/Quest.gd" type="Script" id=1]
 [ext_resource path="res://addons/quest_maker/goals/StringEquals.gd" type="Script" id=2]
 [ext_resource path="res://addons/quest_maker/goals/IntSum.gd" type="Script" id=3]
+[ext_resource path="res://addons/quest_maker/actions/FailQuest.gd" type="Script" id=4]
 
 [node name="TheFryingPan" type="Node"]
 script = ExtResource( 1 )
-
-[node name="Collect3Logs" type="Node" parent="."]
-script = ExtResource( 3 )
-action = "collected_log"
-display_message = "Collect %d logs"
-target = 3
+quest_name = "frying_pan"
+display_name = "The Missing Pan"
 
 [node name="TalkToThieves" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -22,6 +19,7 @@ action = "quest"
 display_message = "Follow the thieves traces"
 optional = true
 clear_goals = null
+add_key = "ciacare"
 value = "frying_talk"
 
 [node name="BuyThePanBack" type="Node" parent="TalkToThieves"]
@@ -32,16 +30,8 @@ __meta__ = {
 action = "quest"
 display_message = "Buy back the frying pan"
 clear_goals = null
+add_key = "pan"
 value = "frying_buyback"
-
-[node name="BringBack" type="Node" parent="TalkToThieves"]
-script = ExtResource( 2 )
-__meta__ = {
-"goal": true
-}
-action = "quest"
-display_message = "Bring back the pan"
-value = "frying_bringback"
 
 [node name="DefeatThieves" type="Node" parent="."]
 script = ExtResource( 2 )
@@ -52,6 +42,12 @@ action = "quest"
 display_message = "Follow the thieves traces"
 clear_goals = true
 value = "frying_defeat"
+
+[node name="Collect3Logs" type="Node" parent="DefeatThieves"]
+script = ExtResource( 3 )
+action = "collected_log"
+display_message = "Collect %d logs"
+target = 3
 
 [node name="BreakPan" type="Node" parent="DefeatThieves"]
 script = ExtResource( 2 )
@@ -64,11 +60,5 @@ optional = true
 fails_quest = true
 value = "frying_break"
 
-[node name="BringBack" type="Node" parent="DefeatThieves"]
-script = ExtResource( 2 )
-__meta__ = {
-"goal": true
-}
-action = "quest"
-display_message = "Bring back the pan"
-value = "frying_bringback"
+[node name="FailQuest" type="Node" parent="."]
+script = ExtResource( 4 )
