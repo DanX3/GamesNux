@@ -110,7 +110,6 @@ func _fill_status(target: Node):
 		return
 		
 	var target_status = target.get_status()
-	print(target_status)
 	target_status['__statelabel__'] = target.statelabel
 	status.append(target_status)
 	
@@ -175,7 +174,6 @@ func _is_goal_recursive(node: Node) -> bool:
 		if not _is_goal_recursive(child):
 			return false
 	
-	print(node.name, node is QuestNode)
 	return node is QuestNode
 
 

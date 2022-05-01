@@ -1,5 +1,5 @@
 tool
-extends "res://addons/quest_maker/QuestNode.gd"
+extends QuestNode
 
 class_name QuestAction
 

@@ -14,36 +14,40 @@ __meta__ = {
 "quest": true
 }
 
-[node name="AddKey" type="Node" parent="."]
+[node name="AddKey_jungle" type="Node" parent="."]
 script = ExtResource( 4 )
 key = "jungle"
 
-[node name="HasKeyJungle" type="Node" parent="."]
+[node name="HasKey_jungle" type="Node" parent="."]
 script = ExtResource( 3 )
 optional = true
 key = "jungle"
 
-[node name="ClearGoals" type="Node" parent="HasKeyJungle"]
+[node name="ClearGoals" type="Node" parent="HasKey_jungle"]
 script = ExtResource( 2 )
 
-[node name="OnSignal" type="Node" parent="HasKeyJungle"]
+[node name="OnSignal" type="Node" parent="HasKey_jungle"]
 script = ExtResource( 6 )
 signal_name = "unlock"
 
-[node name="Log" type="Node" parent="HasKeyJungle"]
+[node name="Log" type="Node" parent="HasKey_jungle"]
 script = ExtResource( 7 )
 message = "Hello world"
 
-[node name="HasFossil" type="Node" parent="."]
+[node name="HasKey_fossil" type="Node" parent="."]
 script = ExtResource( 3 )
 key = "fossil"
 
-[node name="ClearGoals" type="Node" parent="HasFossil"]
+[node name="ClearGoals" type="Node" parent="HasKey_fossil"]
 script = ExtResource( 2 )
 
-[node name="OnSignal2" type="Node" parent="HasFossil"]
+[node name="OnSignal2" type="Node" parent="HasKey_fossil"]
 script = ExtResource( 6 )
 signal_name = "unlock"
 
-[node name="FailQuest" type="Node" parent="HasFossil"]
+[node name="FailQuest" type="Node" parent="HasKey_fossil"]
 script = ExtResource( 5 )
+
+[node name="OnSignal" type="Node" parent="."]
+script = ExtResource( 6 )
+signal_name = "qualcosa"

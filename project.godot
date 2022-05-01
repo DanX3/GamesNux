@@ -14,7 +14,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/quest_maker/actions/AddKey.gd"
 }, {
-"base": "Node",
+"base": "QuestAction",
 "class": "ClearGoals",
 "language": "GDScript",
 "path": "res://addons/quest_maker/actions/ClearGoals.gd"
@@ -54,7 +54,7 @@ _global_script_classes=[ {
 "language": "GDScript",
 "path": "res://addons/quest_maker/Quest.gd"
 }, {
-"base": "Node",
+"base": "QuestNode",
 "class": "QuestAction",
 "language": "GDScript",
 "path": "res://addons/quest_maker/QuestAction.gd"

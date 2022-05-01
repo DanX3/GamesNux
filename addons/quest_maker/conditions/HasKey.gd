@@ -11,3 +11,6 @@ func set_goal(active: bool):
 		process_next()
 	else:
 		set_active(false)
+
+func _get_custom_name():
+	return "HasKey_" + key

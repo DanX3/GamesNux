@@ -75,9 +75,21 @@ func set_active(active: bool):
 	self.active = active
 	name = labels[active] + name.substr(2)
 
-func _enter_tree():
+
+func _ready():
+	print("ready ", name)
 	if not Engine.editor_hint:
 		name = '  ' + name
+	else:
+		var custom_name = _get_custom_name()
+#		print("node %s got %s" % [name, custom_name])
+		if custom_name != "":
+			name = custom_name
+#			print('set custom name ', custom_name)
+
+
+func _get_custom_name() -> String:
+	return ""
 
 var statelabel = StateLabel.UNCHECKED
 

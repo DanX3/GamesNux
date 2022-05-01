@@ -1,5 +1,5 @@
 tool
-extends "res://addons/quest_maker/QuestAction.gd"
+extends QuestAction
 
 class_name ClearGoals
 
