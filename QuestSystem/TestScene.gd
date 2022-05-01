@@ -1,6 +1,6 @@
 extends Node2D
 
-onready var quest = $TheFryingPan
+onready var quest = $AnotherQuest
 
 func _on_EmptyButton_pressed():
 	get_node("/root/SignalHub").emit_signal("s_empty",\

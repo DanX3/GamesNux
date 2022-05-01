@@ -11,10 +11,6 @@ const savepath = 'res://addons/quest_maker/questdata/%s.tres'
 export (String) var action
 export (String) var display_message
 export (bool) var optional = false
-export (bool) var fails_quest = false
-export (bool) var clear_goals = false
-export (Array, String) var add_key
-export (Array, String) var remove_key
 
 
 func _ready():

@@ -10,14 +10,44 @@ config_version=4
 
 _global_script_classes=[ {
 "base": "QuestAction",
+"class": "AddKey",
+"language": "GDScript",
+"path": "res://addons/quest_maker/actions/AddKey.gd"
+}, {
+"base": "Node",
+"class": "ClearGoals",
+"language": "GDScript",
+"path": "res://addons/quest_maker/actions/ClearGoals.gd"
+}, {
+"base": "QuestAction",
 "class": "CustomAction",
 "language": "GDScript",
 "path": "res://QuestSystem/CustomAction.gd"
 }, {
 "base": "Node",
+"class": "FailQuest",
+"language": "GDScript",
+"path": "res://addons/quest_maker/actions/FailQuest.gd"
+}, {
+"base": "Node",
 "class": "Goal",
 "language": "GDScript",
 "path": "res://addons/quest_maker/Goal.gd"
+}, {
+"base": "QuestGoal",
+"class": "HasKey",
+"language": "GDScript",
+"path": "res://addons/quest_maker/conditions/HasKey.gd"
+}, {
+"base": "QuestAction",
+"class": "Log",
+"language": "GDScript",
+"path": "res://addons/quest_maker/actions/Log.gd"
+}, {
+"base": "QuestGoal",
+"class": "OnSignal",
+"language": "GDScript",
+"path": "res://addons/quest_maker/goals/OnSignal.gd"
 }, {
 "base": "Node",
 "class": "Quest",
@@ -28,6 +58,16 @@ _global_script_classes=[ {
 "class": "QuestAction",
 "language": "GDScript",
 "path": "res://addons/quest_maker/QuestAction.gd"
+}, {
+"base": "QuestNode",
+"class": "QuestGoal",
+"language": "GDScript",
+"path": "res://addons/quest_maker/QuestGoal.gd"
+}, {
+"base": "Node",
+"class": "QuestNode",
+"language": "GDScript",
+"path": "res://addons/quest_maker/QuestNode.gd"
 }, {
 "base": "Resource",
 "class": "QuestState",
@@ -40,10 +80,18 @@ _global_script_classes=[ {
 "path": "res://addons/quest_maker/SignalHUB.gd"
 } ]
 _global_script_class_icons={
+"AddKey": "",
+"ClearGoals": "",
 "CustomAction": "",
+"FailQuest": "",
 "Goal": "",
+"HasKey": "",
+"Log": "",
+"OnSignal": "",
 "Quest": "",
 "QuestAction": "",
+"QuestGoal": "",
+"QuestNode": "",
 "QuestState": "",
 "SignalHUB": ""
 }
@@ -51,7 +99,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Lab"
-run/main_scene="res://Scenes/Demo.tscn"
+run/main_scene="res://QuestSystem/TestScene.tscn"
 config/icon="res://icon.png"
 
 [autoload]

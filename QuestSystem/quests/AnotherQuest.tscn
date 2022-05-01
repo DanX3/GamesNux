@@ -1,16 +1,49 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=8 format=2]
 
 [ext_resource path="res://addons/quest_maker/Quest.gd" type="Script" id=1]
-[ext_resource path="res://addons/quest_maker/goals/EmptySum.gd" type="Script" id=2]
+[ext_resource path="res://addons/quest_maker/actions/ClearGoals.gd" type="Script" id=2]
+[ext_resource path="res://addons/quest_maker/conditions/HasKey.gd" type="Script" id=3]
+[ext_resource path="res://addons/quest_maker/actions/AddKey.gd" type="Script" id=4]
+[ext_resource path="res://addons/quest_maker/actions/FailQuest.gd" type="Script" id=5]
+[ext_resource path="res://addons/quest_maker/goals/OnSignal.gd" type="Script" id=6]
+[ext_resource path="res://addons/quest_maker/actions/Log.gd" type="Script" id=7]
 
 [node name="AnotherQuest" type="Node"]
 script = ExtResource( 1 )
-
-[node name="EmptySum" type="Node" parent="."]
-script = ExtResource( 2 )
 __meta__ = {
-"goal": true
+"quest": true
 }
-action = "quest"
-display_message = "Test"
-times = 1
+
+[node name="AddKey" type="Node" parent="."]
+script = ExtResource( 4 )
+key = "jungle"
+
+[node name="HasKeyJungle" type="Node" parent="."]
+script = ExtResource( 3 )
+optional = true
+key = "jungle"
+
+[node name="ClearGoals" type="Node" parent="HasKeyJungle"]
+script = ExtResource( 2 )
+
+[node name="OnSignal" type="Node" parent="HasKeyJungle"]
+script = ExtResource( 6 )
+signal_name = "unlock"
+
+[node name="Log" type="Node" parent="HasKeyJungle"]
+script = ExtResource( 7 )
+message = "Hello world"
+
+[node name="HasFossil" type="Node" parent="."]
+script = ExtResource( 3 )
+key = "fossil"
+
+[node name="ClearGoals" type="Node" parent="HasFossil"]
+script = ExtResource( 2 )
+
+[node name="OnSignal2" type="Node" parent="HasFossil"]
+script = ExtResource( 6 )
+signal_name = "unlock"
+
+[node name="FailQuest" type="Node" parent="HasFossil"]
+script = ExtResource( 5 )
