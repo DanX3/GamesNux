@@ -23,6 +23,14 @@ func _ready():
 	if not Engine.editor_hint:
 		set_meta("quest", true)
 		get_child(0).visited()
+#		for child in get_children():
+#			_set_custom_name_recursive(child)
+#	else:
+		
+#func _set_custom_name_recursive(node):
+#	node.set_custom_name()
+#	for child in node.get_children():
+#		_set_custom_name_recursive(child)
 #	if not Engine.editor_hint:
 #		print("processing goals")
 #		_process_goals(null)

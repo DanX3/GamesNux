@@ -11,5 +11,5 @@ __meta__ = {
 quest_name = "frying_pan"
 display_name = "The Missing Pan"
 
-[node name="    estAction" type="Node" parent="."]
+[node name="QuestAction" type="Node" parent="."]
 script = ExtResource( 2 )

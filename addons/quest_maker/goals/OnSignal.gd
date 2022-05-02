@@ -1,3 +1,4 @@
+tool
 extends QuestGoal
 
 class_name OnSignal
@@ -14,4 +15,4 @@ func _on_signal(action):
 	process_next()
 
 func _get_custom_name() -> String:
-	return ("[Opt]" if optional else "") + "OnSignal_" + signal_name
+	return "OnSignal_" + signal_name

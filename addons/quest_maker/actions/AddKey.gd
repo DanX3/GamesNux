@@ -10,4 +10,4 @@ func execute():
 	print("added key %s to quest" % key)
 
 func _get_custom_name():
-	return "AddKey_" + key
+	return "+Key_" + key

@@ -6,19 +6,6 @@ class_name QuestNode
 var active := false
 
 func process_next():
-#	set_active(false)
-#	if get_child_count() > 0:
-#		get_child(0).set_active(true)
-#		get_child(0).visited()
-#		return
-#
-#	if _is_node_last():
-#		get_quest().succeed()
-#		return
-#
-#	var next_node = _get_next_node()
-#	next_node.set_active(true)
-#	next_node.visited()
 	_next(self)
 
 func process_stop():
@@ -27,12 +14,13 @@ func process_stop():
 
 
 func process_add(node: QuestNode):
-	_set_active(node, true)
+#	_set_active(node, true)
 	node.visited()
 	
 
 static func _next(node: QuestNode):
-	_set_active(node, false)
+#	_set_active(node, false)
+	node.left()
 	
 	var next_node = _get_next(node)
 	
@@ -41,8 +29,7 @@ static func _next(node: QuestNode):
 		return
 	
 	print('visiting ', next_node.name)
-	_set_active(next_node, true)
-	
+#	_set_active(next_node, true)
 	next_node.visited()
 	
 	
@@ -63,6 +50,9 @@ static func _set_active(node, active):
 func visited():
 	pass
 
+func left():
+	pass
+
 enum StateLabel { UNCHECKED, ACTIVE, REACHED, FAILED }
 const labels = {
 	false: '  ',
@@ -77,15 +67,13 @@ func set_active(active: bool):
 
 
 func _ready():
-	print("ready ", name)
 	if not Engine.editor_hint:
 		name = '  ' + name
 	else:
+		# set node's custom name if provided
 		var custom_name = _get_custom_name()
-#		print("node %s got %s" % [name, custom_name])
 		if custom_name != "":
 			name = custom_name
-#			print('set custom name ', custom_name)
 
 
 func _get_custom_name() -> String:
