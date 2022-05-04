@@ -5,22 +5,40 @@ class_name QuestNode
 
 var active := false
 
-func process_next():
-	_next(self)
+func _ready():
+	if not Engine.editor_hint:
+		name = '  ' + name
+	else:
+		# set node's custom name if provided
+		var custom_name = _get_custom_name()
+		if custom_name != "":
+			name = custom_name
 
-func process_stop():
-	name = labels[false] + name.substr(2)
-	active = false
 
+func _get_custom_name() -> String:
+	return ""
+	
+func visited():
+	pass
+
+func left():
+	pass
+
+func process_next(leave = true):
+	_next(self, leave)
+
+#func process_stop():
+#	set_active(false)
 
 func process_add(node: QuestNode):
 #	_set_active(node, true)
 	node.visited()
 	
 
-static func _next(node: QuestNode):
+static func _next(node: QuestNode, leave: bool):
 #	_set_active(node, false)
-	node.left()
+	if leave:
+		node.left()
 	
 	var next_node = _get_next(node)
 	
@@ -28,11 +46,22 @@ static func _next(node: QuestNode):
 		_get_quest(node).succeed()
 		return
 	
-	print('visiting ', next_node.name)
+	print('>> ', next_node.name)
 #	_set_active(next_node, true)
 	next_node.visited()
+#
+func go_to(from: QuestNode, to: QuestNode):
+	if from != null:
+		from.left()
+		print("<< ", from.name)
 	
+		if to == null:
+			_get_quest(from).succeed()
+			return
 	
+	print(">> ", to.name)
+	to.visited()
+
 static func _get_next(node: QuestNode) -> QuestNode:
 	if node.get_child_count() > 0:
 		return node.get_child(0) as QuestNode
@@ -47,11 +76,7 @@ static func _set_active(node, active):
 	node.name = labels[active] + node.name.substr(2)
 	node.active = active
 
-func visited():
-	pass
 
-func left():
-	pass
 
 enum StateLabel { UNCHECKED, ACTIVE, REACHED, FAILED }
 const labels = {
@@ -64,20 +89,7 @@ const labels = {
 func set_active(active: bool):
 	self.active = active
 	name = labels[active] + name.substr(2)
-
-
-func _ready():
-	if not Engine.editor_hint:
-		name = '  ' + name
-	else:
-		# set node's custom name if provided
-		var custom_name = _get_custom_name()
-		if custom_name != "":
-			name = custom_name
-
-
-func _get_custom_name() -> String:
-	return ""
+	
 
 var statelabel = StateLabel.UNCHECKED
 
@@ -99,5 +111,7 @@ static func _get_quest(node: Node):
 func _is_node_last() -> bool:
 	return (get_index() + 1) == get_parent().get_child_count()
 
-func _get_next_node() -> QuestNode:
+func _get_next_sibling() -> QuestNode:
+	if _is_node_last():
+		return null
 	return get_parent().get_child(get_index() + 1) as QuestNode

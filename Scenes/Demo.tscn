@@ -8,7 +8,7 @@
 [ext_resource path="res://Scenes/Coins/CoinYellow.tscn" type="PackedScene" id=6]
 [ext_resource path="res://Scenes/Coins/CoinBlue.tscn" type="PackedScene" id=7]
 [ext_resource path="res://addons/quest_maker/Quest.gd" type="Script" id=8]
-[ext_resource path="res://addons/quest_maker/goals/StringEquals.gd" type="Script" id=9]
+[ext_resource path="res://addons/quest_maker/old_goals/StringEquals.gd" type="Script" id=9]
 
 [sub_resource type="Shader" id=3]
 code = "shader_type canvas_item;

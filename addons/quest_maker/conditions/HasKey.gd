@@ -1,15 +1,12 @@
 tool
-extends QuestGoal
+extends QuestIf
 
 class_name HasKey
 
 export (String) var key
 
-func set_goal(active: bool):
-	print("quest has key %s: %s" % [key, str(get_quest().keys.has(key))])
-	if active and get_quest().keys.has(key):
-		process_next()
-
-
+func get_condition() -> bool:
+	return get_quest().keys.has(key)
+	
 func _get_custom_name():
-	return "HasKey_" + key
+	return "HasKey " + key

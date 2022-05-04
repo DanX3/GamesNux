@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=2]
 
-[ext_resource path="res://addons/quest_maker/goals/StringEquals.gd" type="Script" id=1]
-[ext_resource path="res://addons/quest_maker/goals/CheckKey.gd" type="Script" id=2]
+[ext_resource path="res://addons/quest_maker/old_goals/StringEquals.gd" type="Script" id=1]
+[ext_resource path="res://addons/quest_maker/old_goals/CheckKey.gd" type="Script" id=2]
 [ext_resource path="res://addons/quest_maker/Quest.gd" type="Script" id=3]
 
 [node name="TastyMeal" type="Node"]

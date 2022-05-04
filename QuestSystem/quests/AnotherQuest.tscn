@@ -1,14 +1,11 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=7 format=2]
 
 [ext_resource path="res://addons/quest_maker/Quest.gd" type="Script" id=1]
-[ext_resource path="res://addons/quest_maker/actions/ClearGoals.gd" type="Script" id=2]
 [ext_resource path="res://addons/quest_maker/conditions/HasKey.gd" type="Script" id=3]
 [ext_resource path="res://addons/quest_maker/actions/AddKey.gd" type="Script" id=4]
 [ext_resource path="res://addons/quest_maker/actions/FailQuest.gd" type="Script" id=5]
-[ext_resource path="res://addons/quest_maker/goals/OnSignal.gd" type="Script" id=6]
+[ext_resource path="res://addons/quest_maker/old_goals/OnSignalEmpty.gd" type="Script" id=6]
 [ext_resource path="res://addons/quest_maker/actions/Log.gd" type="Script" id=7]
-[ext_resource path="res://addons/quest_maker/goals/OnSignalIntSum.gd" type="Script" id=8]
-[ext_resource path="res://addons/quest_maker/actions/RemoveKey.gd" type="Script" id=9]
 
 [node name="AnotherQuest" type="Node"]
 script = ExtResource( 1 )
@@ -16,57 +13,37 @@ __meta__ = {
 "quest": true
 }
 
-[node name="OnSignal_took_damagex50" type="Node" parent="."]
-script = ExtResource( 8 )
-signal_name = "took_damage"
-amount = 50
-
-[node name="Log" type="Node" parent="."]
-script = ExtResource( 7 )
-message = "Took enough damage"
-
-[node name="+Key_jungle" type="Node" parent="."]
+[node name="+Key jungle" type="Node" parent="."]
 script = ExtResource( 4 )
 key = "jungle"
 
-[node name="+Key_fossil" type="Node" parent="."]
+[node name="+Key fossil" type="Node" parent="."]
 script = ExtResource( 4 )
 key = "fossil"
 
-[node name="-Key_jungle" type="Node" parent="."]
-script = ExtResource( 9 )
-key = "jungle"
-
-[node name="HasKey_jungle" type="Node" parent="."]
+[node name="HasKey jungle" type="Node" parent="."]
 script = ExtResource( 3 )
-optional = true
 key = "jungle"
 
-[node name="ClearGoals" type="Node" parent="HasKey_jungle"]
-script = ExtResource( 2 )
-
-[node name="OnSignal_unlock" type="Node" parent="HasKey_jungle"]
+[node name="OnSignal unlock" type="Node" parent="HasKey jungle"]
 script = ExtResource( 6 )
 signal_name = "unlock"
 
-[node name="Log" type="Node" parent="HasKey_jungle"]
+[node name="Log" type="Node" parent="HasKey jungle"]
 script = ExtResource( 7 )
 message = "Hello world"
 
-[node name="HasKey_fossil" type="Node" parent="."]
+[node name="HasKey fossil" type="Node" parent="."]
 script = ExtResource( 3 )
 key = "fossil"
 
-[node name="ClearGoals" type="Node" parent="HasKey_fossil"]
-script = ExtResource( 2 )
-
-[node name="OnSignal_another_unlock" type="Node" parent="HasKey_fossil"]
+[node name="OnSignal unlock2" type="Node" parent="HasKey fossil"]
 script = ExtResource( 6 )
-signal_name = "another_unlock"
+signal_name = "unlock2"
 
-[node name="FailQuest" type="Node" parent="HasKey_fossil"]
+[node name="FailQuest" type="Node" parent="HasKey fossil"]
 script = ExtResource( 5 )
 
-[node name="Log2" type="Node" parent="HasKey_fossil"]
+[node name="Log2" type="Node" parent="HasKey fossil"]
 script = ExtResource( 7 )
 message = "Failed Quest"

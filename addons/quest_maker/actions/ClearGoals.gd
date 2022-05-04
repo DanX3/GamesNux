@@ -4,8 +4,9 @@ extends QuestAction
 class_name ClearGoals
 
 func execute():
-	for child in get_quest().get_children():
-		_disable_goals(child)
+	get_quest().clear_goals()
+#	for child in get_quest().get_children():
+#		_disable_goals(child)
 
 func _disable_goals(node: QuestNode):
 	if node is QuestGoal and node.active:
